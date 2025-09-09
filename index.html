@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicConnect - Smart Municipal Complaint Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <div class="logo">
+                        <div class="emblem">🏛️</div>
+                        <div class="logo-text">
+                            <h1>CivicConnect</h1>
+                            <p>Smart Municipal Management</p>
+                        </div>
+                    </div>
+                </div>
+                <nav class="header__nav">
+                    <button class="nav-btn active" data-section="home">Home</button>
+                    <button class="nav-btn" data-section="register">Report Issue</button>
+                    <button class="nav-btn" data-section="track">Track Complaint</button>
+                    <button class="nav-btn" data-section="dashboard">Officer Login</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <div class="hero__content">
+                        <h2>Smart Municipal Complaint System</h2>
+                        <p>AI-powered complaint management with intelligent priority system for faster problem resolution. Your voice matters in building a better city.</p>
+                        <div class="hero__actions">
+                            <button class="btn btn--primary btn--lg" data-section="register">Report New Issue</button>
+                            <button class="btn btn--outline btn--lg" data-section="track">Track Complaint</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Priority-Based Stats -->
+                <div class="stats">
+                    <h3>Real-time Dashboard</h3>
+                    <div class="stats__grid">
+                        <div class="stat-card priority-emergency">
+                            <div class="stat-number" id="emergencyCount">1</div>
+                            <div class="stat-label">Emergency Issues</div>
+                            <div class="stat-time">Response: 2 hours</div>
+                        </div>
+                        <div class="stat-card priority-high">
+                            <div class="stat-number" id="highCount">1</div>
+                            <div class="stat-label">High Priority</div>
+                            <div class="stat-time">Response: 24 hours</div>
+                        </div>
+                        <div class="stat-card priority-medium">
+                            <div class="stat-number" id="mediumCount">1</div>
+                            <div class="stat-label">Medium Priority</div>
+                            <div class="stat-time">Response: 3 days</div>
+                        </div>
+                        <div class="stat-card priority-resolved">
+                            <div class="stat-number" id="resolvedCount">0</div>
+                            <div class="stat-label">Resolved Today</div>
+                            <div class="stat-time">Avg: 2.5 days</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Features Showcase -->
+                <div class="ai-features">
+                    <h3>🤖 AI-Powered Features</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔍</div>
+                            <h4>Smart Duplicate Detection</h4>
+                            <p>AI automatically detects similar complaints and groups them for efficient resolution</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h4>Auto-Priority Assignment</h4>
+                            <p>Intelligent priority detection based on keywords, location, and urgency factors</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <h4>Predictive Analytics</h4>
+                            <p>Advanced analytics to identify problem hotspots and optimize resource allocation</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h4>Smart Routing</h4>
+                            <p>Automatic assignment to appropriate departments based on complaint analysis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent High Priority Issues -->
+                <div class="urgent-issues">
+                    <h3>⚠️ Urgent Issues Requiring Attention</h3>
+                    <div class="urgent-list" id="urgentIssuesList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Register Complaint Section -->
+        <section id="register" class="section">
+            <div class="container">
+                <div class="form-header">
+                    <h2>Report Municipal Issue</h2>
+                    <p>Our AI system will analyze your complaint and assign appropriate priority. All fields marked with * are mandatory.</p>
+                </div>
+
+                <!-- AI Duplicate Detection Results -->
+                <div id="duplicateAlert" class="duplicate-alert hidden">
+                    <div class="alert-content">
+                        <h4>🤖 Similar Issues Found</h4>
+                        <p>Our AI system found similar complaints. You can:</p>
+                        <div id="duplicateList" class="duplicate-list"></div>
+                        <div class="duplicate-actions">
+                            <button class="btn btn--outline btn--sm" id="addToDuplicateBtn">Add My Report to Existing</button>
+                            <button class="btn btn--primary btn--sm" id="proceedNewBtn">Submit New Complaint</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="complaint-form" id="complaintForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="category">Problem Category *</label>
+                            <select class="form-control" id="category" required>
+                                <option value="">Select a category</option>
+                                <option value="Potholes">Potholes</option>
+                                <option value="Sewage Blockage">Sewage Blockage</option>
+                                <option value="Water Supply">Water Supply</option>
+                                <option value="Street Lighting">Street Lighting</option>
+                                <option value="Waste Management">Waste Management</option>
+                                <option value="Electricity">Electricity</option>
+                                <option value="Public Transport">Public Transport</option>
+                                <option value="Parks & Recreation">Parks & Recreation</option>
+                                <option value="Building Permits">Building Permits</option>
+                                <option value="Noise Pollution">Noise Pollution</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="title">Issue Title *</label>
+                            <input type="text" class="form-control" id="title" placeholder="Brief description of the problem" required>
+                        </div>
+
+                        <div class="form-group form-group--full">
+                            <label class="form-label" for="location">Location *</label>
+                            <input type="text" class="form-control" id="location" placeholder="Complete address with landmarks" required>
+                        </div>
+
+                        <div class="form-group form-group--full">
+                            <label class="form-label" for="description">Detailed Description *</label>
+                            <textarea class="form-control" id="description" rows="4" placeholder="Provide detailed description including severity, impact, and any safety concerns" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="citizenName">Your Name *</label>
+                            <input type="text" class="form-control" id="citizenName" placeholder="Full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number *</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="10-digit mobile number" required>
+                        </div>
+
+                        <div class="form-group form-group--full">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="For important updates">
+                        </div>
+
+                        <!-- AI Priority Prediction -->
+                        <div class="form-group form-group--full">
+                            <div id="priorityPreview" class="priority-preview hidden">
+                                <label class="form-label">🤖 AI Priority Assessment</label>
+                                <div class="priority-display">
+                                    <div class="priority-badge" id="predictedPriority">Medium</div>
+                                    <div class="priority-reasoning" id="priorityReasoning">
+                                        Based on category and keywords in description
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group--full">
+                            <label class="form-label">Upload Photos (Optional)</label>
+                            <div class="file-upload" id="fileUpload">
+                                <div class="file-upload__area">
+                                    <div class="file-upload__icon">📷</div>
+                                    <p>Drag and drop photos here or click to browse</p>
+                                    <small>Support: JPG, PNG, WebP (Max 5 images, 2MB each)</small>
+                                    <input type="file" id="photoInput" multiple accept="image/*" class="file-input">
+                                </div>
+                                <div class="file-preview" id="filePreview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn--primary btn--lg">Submit Complaint</button>
+                        <button type="reset" class="btn btn--outline">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Track Complaint Section -->
+        <section id="track" class="section">
+            <div class="container">
+                <div class="form-header">
+                    <h2>Track Your Complaint</h2>
+                    <p>Enter your complaint ID or phone number to check real-time status updates.</p>
+                </div>
+
+                <div class="track-form">
+                    <div class="form-group">
+                        <label class="form-label" for="trackId">Complaint ID or Phone Number</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="trackId" placeholder="Enter CMP001 or mobile number">
+                            <button class="btn btn--primary" id="trackBtn">Track Status</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="trackResult" class="track-result hidden">
+                    <div class="complaint-details card">
+                        <div class="card__body">
+                            <div class="complaint-header">
+                                <div class="complaint-id-display"></div>
+                                <div class="complaint-status-display"></div>
+                            </div>
+                            <div class="priority-display-track">
+                                <div class="priority-badge-large" id="trackPriority"></div>
+                                <div class="response-time" id="trackResponseTime"></div>
+                            </div>
+                            <div class="complaint-info-track"></div>
+                            <div class="progress-tracker" id="progressTracker"></div>
+                            <div class="complaint-timeline-track"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Priority-based Recent Complaints -->
+                <div class="my-complaints">
+                    <h3>Recent Complaints by Priority</h3>
+                    <div class="priority-tabs">
+                        <button class="priority-tab active" data-priority="all">All</button>
+                        <button class="priority-tab emergency" data-priority="Emergency">Emergency</button>
+                        <button class="priority-tab high" data-priority="High">High</button>
+                        <button class="priority-tab medium" data-priority="Medium">Medium</button>
+                        <button class="priority-tab low" data-priority="Low">Low</button>
+                    </div>
+                    <div class="complaints-grid" id="citizenComplaints"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Municipal Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="container">
+                <!-- Login Form -->
+                <div id="loginForm" class="login-container">
+                    <div class="card login-card">
+                        <div class="card__body">
+                            <h2>Municipal Officer Login</h2>
+                            <p>Access priority-based complaint management system</p>
+                            <form id="municipalLogin">
+                                <div class="form-group">
+                                    <label class="form-label" for="loginEmail">Email</label>
+                                    <input type="email" class="form-control" id="loginEmail" value="officer@municipal.gov" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="loginPassword">Password</label>
+                                    <input type="password" class="form-control" id="loginPassword" value="admin123" required>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width">Login to Dashboard</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard -->
+                <div id="dashboardContent" class="dashboard hidden">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <h2>Priority-Based Complaint Dashboard</h2>
+                            <p>Efficiently manage complaints with AI-powered priority system</p>
+                        </div>
+                        <div class="dashboard-stats">
+                            <div class="quick-stat emergency">
+                                <div class="quick-stat-number" id="dashEmergencyCount">1</div>
+                                <div class="quick-stat-label">Emergency</div>
+                            </div>
+                            <div class="quick-stat high">
+                                <div class="quick-stat-number" id="dashHighCount">1</div>
+                                <div class="quick-stat-label">High Priority</div>
+                            </div>
+                            <div class="quick-stat medium">
+                                <div class="quick-stat-number" id="dashMediumCount">1</div>
+                                <div class="quick-stat-label">Medium</div>
+                            </div>
+                        </div>
+                        <button class="btn btn--outline" id="logoutBtn">Logout</button>
+                    </div>
+
+                    <!-- Priority-based Filters -->
+                    <div class="dashboard-filters">
+                        <div class="filter-group">
+                            <select class="form-control" id="filterPriority">
+                                <option value="">All Priorities</option>
+                                <option value="Emergency">🚨 Emergency</option>
+                                <option value="High">🔴 High</option>
+                                <option value="Medium">🟡 Medium</option>
+                                <option value="Low">🟢 Low</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <select class="form-control" id="filterStatus">
+                                <option value="">All Status</option>
+                                <option value="Received">Received</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Resolved">Resolved</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <select class="form-control" id="filterCategory">
+                                <option value="">All Categories</option>
+                                <option value="Potholes">Potholes</option>
+                                <option value="Sewage Blockage">Sewage Blockage</option>
+                                <option value="Water Supply">Water Supply</option>
+                                <option value="Street Lighting">Street Lighting</option>
+                                <option value="Waste Management">Waste Management</option>
+                                <option value="Electricity">Electricity</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <input type="text" class="form-control" id="searchComplaints" placeholder="Search complaints...">
+                        </div>
+                        <div class="filter-group">
+                            <button class="btn btn--primary" id="sortByPriorityBtn">Sort by Priority</button>
+                        </div>
+                    </div>
+
+                    <!-- Priority-based Complaints Table -->
+                    <div class="complaints-table-container">
+                        <table class="complaints-table">
+                            <thead>
+                                <tr>
+                                    <th>Priority</th>
+                                    <th>ID</th>
+                                    <th>Category</th>
+                                    <th>Title</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Duplicates</th>
+                                    <th>Response Due</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="complaintsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Complaint Details Modal -->
+    <div id="complaintModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Complaint Details</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Success!</h3>
+                <button class="modal-close" id="closeSuccess">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-content">
+                    <div class="success-icon">✅</div>
+                    <h4>Complaint Registered Successfully</h4>
+                    <p>Your complaint has been assigned ID: <strong id="generatedId"></strong></p>
+                    <div class="assigned-priority">
+                        <p>🤖 AI-Assigned Priority: <span id="assignedPriority" class="priority-badge"></span></p>
+                        <p>Expected Response Time: <span id="expectedResponse"></span></p>
+                    </div>
+                    <p>You will receive SMS/email updates on progress.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
